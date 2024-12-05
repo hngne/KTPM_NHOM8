@@ -14,7 +14,7 @@ public interface CinemaShowRepository extends JpaRepository<CinemaShow, String> 
 	 List<CinemaShow> findConflictingShows(@Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime, @Param("hallID") String hallID);
 	 
 	 List<CinemaShow> findByCinemaHallId(String hallId);
-	 List<CinemaShow> findByMovieId(String hallId);
+	 List<CinemaShow> findByMovieId(Long movie_id);
 	 
 	 @Query(value = "SELECT s FROM CinemaShow s WHERE s.cinemaHall.id = :hallId AND s.movie.id = :movieId AND s.startTime = :startTime")
 	 CinemaShow findByHallIdAndMovieId(@Param("hallId") String hallId, @Param("movieId") Long movieId, @Param("startTime") LocalDateTime startTime);

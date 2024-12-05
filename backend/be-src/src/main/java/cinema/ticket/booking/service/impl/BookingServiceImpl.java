@@ -66,7 +66,7 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private CinemaShowRepository showREPO;
 	
-	@Autowired
+
 	private UserService userSER;
 	
 	@Autowired

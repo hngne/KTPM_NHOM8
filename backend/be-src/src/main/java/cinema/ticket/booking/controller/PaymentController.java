@@ -34,7 +34,7 @@ import cinema.ticket.booking.response.MyApiResponse;
 @Tag(name = "9. Payment Endpoint")
 public class PaymentController {
 
-	@Autowired
+
 	private PaymentService paymentSER;
 
 	@PostMapping("/create")

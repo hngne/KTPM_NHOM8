@@ -3,6 +3,8 @@ package cinema.ticket.booking.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -35,7 +37,7 @@ import jakarta.validation.Valid;
 @Tag(name = "1. Authentication Endpoint")
 public class AuthenticationController {
 
-	@Autowired
+	@Qualifier("authenticationService")
 	private AuthenticationService authService;
 
 	@PostMapping("/signup")

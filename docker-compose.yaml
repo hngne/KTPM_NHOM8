@@ -23,6 +23,8 @@ services:
   db:
     container_name: mysql-database
     image: mysql:latest
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: CC6tjBh6mkJ8h8PXU7cg8zUx4E6ABFrMQ44EaxU59yfTvYyzWS
       MYSQL_DATABASE: cinemaDB

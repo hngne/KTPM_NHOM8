@@ -155,7 +155,7 @@ public class CinemaShowServiceImpl implements CinemaShowService {
 	
 	@Override
 	public List<ShowInfoResponse> getAllShowByMovieID(String movieID) {
-		List<CinemaShow> shows = showREPO.findByMovieId(movieID);
+		List<CinemaShow> shows = showREPO.findByMovieId(Long.valueOf(movieID));
 		return this.convertToListShowInfo(shows);
 	}
 

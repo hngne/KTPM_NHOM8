@@ -20,7 +20,7 @@ public class JWTTokenServiceImpl implements JWTokenService {
 	final private Long IV = 736884916322117L;
 	final private String salt = "d93ae9348f39f1bd";
 	
-	private ChaCha20util cipher = new ChaCha20util(secretKey, IV, salt);
+	private final ChaCha20util cipher = new ChaCha20util(secretKey, IV, salt);
 	
 	@Autowired
 	private JWTokenRepository jwtTokenRepo;
@@ -66,11 +66,10 @@ public class JWTTokenServiceImpl implements JWTokenService {
 	}
 	
 	@Override
-	public String setAccessToken(JWTToken data, String accessToken) {
+	public void setAccessToken(JWTToken data, String accessToken) {
 		String accessTokenEncrypt = cipher.encryptString(accessToken);
 		data.setAccessToken(accessTokenEncrypt);
 		jwtTokenRepo.save(data);
-		return accessTokenEncrypt;
 	}
 
 	@Override

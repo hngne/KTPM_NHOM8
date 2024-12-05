@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "0. Testing")
 public class ExampleController {
 	
-	@Autowired
+
 	private UserService userSER;
 	
 	@GetMapping("/user/info/{username}")

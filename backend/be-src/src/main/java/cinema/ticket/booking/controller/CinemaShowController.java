@@ -37,7 +37,7 @@ import jakarta.validation.Valid;
 @Tag(name = "4. Cinema Show Endpoint")
 public class CinemaShowController {
 
-	@Autowired
+
 	private CinemaShowService cinemaShowService;
 
 	// @Autowired

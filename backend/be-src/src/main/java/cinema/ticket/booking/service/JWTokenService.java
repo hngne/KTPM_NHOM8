@@ -15,6 +15,6 @@ public interface JWTokenService {
 	public JWTToken updateInfo(JWTToken data, String accessToken, String refreshToken);
 	public String getAccessToken(Account user);
 	public String getRefreshToken(Account user);
-	public String setAccessToken(JWTToken data, String accessToken);
+	public void setAccessToken(JWTToken data, String accessToken);
 	public String setRefreshToken(JWTToken data, String refreshToken);
 }

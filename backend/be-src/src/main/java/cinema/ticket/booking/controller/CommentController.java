@@ -37,7 +37,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/comment")
 public class CommentController {
 	
-	@Autowired
+
 	private CommentService commentService;
 	
 	@PostMapping("/add")

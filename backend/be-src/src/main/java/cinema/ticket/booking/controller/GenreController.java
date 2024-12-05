@@ -33,10 +33,10 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/genre")
 @Tag(name = "6. Genre Endpoint")
 public class GenreController {
-	@Autowired
+
 	private GenreService gService;
 
-	@Autowired
+
 	private GenreReposity gReposity;
 
 	@GetMapping("/getall")

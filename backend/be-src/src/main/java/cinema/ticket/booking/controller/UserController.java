@@ -43,7 +43,7 @@ import jakarta.validation.Valid;
 @Tag(name="2. User Endpoint")
 public class UserController {
 	
-	@Autowired
+
 	private UserService userSER;
 	
 	

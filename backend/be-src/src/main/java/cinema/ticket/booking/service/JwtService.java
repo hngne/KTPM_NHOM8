@@ -1,5 +1,6 @@
 package cinema.ticket.booking.service;
 
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -10,13 +11,13 @@ import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +35,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtService {
 
-	@Autowired
+    @Qualifier("userService")
 	private UserService userSER;
 
 	@Value("${app.issuer}")
@@ -134,21 +135,16 @@ public class JwtService {
 
 	private Claims extractAllClaims(String token, String key) {
 		String algorithm = this.getAlgorithm(token);
-		switch (algorithm) {
-			case "RS256":
-				return this.RS256_verify(token);
-
-			case "HS256":
-				return this.HS256_verify(token);
-
-			default:
-				throw new MyAccessDeniedException("Token is invalid");
-		}
+        return switch (algorithm) {
+            case "RS256" -> this.RS256_verify(token);
+            case "HS256" -> this.HS256_verify(token);
+            default -> throw new MyAccessDeniedException("Token is invalid");
+        };
 	}
 
 	private Claims HS256_verify(String token) {
 		try {
-			byte[] publicKey = this.publicKey.getBytes("UTF-8");
+			byte[] publicKey = this.publicKey.getBytes(StandardCharsets.UTF_8);
 			JwtParserBuilder claimsBuilder = Jwts.parserBuilder().setSigningKey(publicKey);
 			return this.getClaims(claimsBuilder, token);
 
@@ -214,7 +210,8 @@ public class JwtService {
 
 	public String getAlgorithm(String token) {
 		JSONObject header = getTokenPart(token, 0);
-		if (!header.isEmpty())
+        assert header != null;
+        if (!header.isEmpty())
 			return header.getString("alg");
 		return null;
 	}
@@ -223,7 +220,8 @@ public class JwtService {
 		JSONObject body = getTokenPart(token, 1);
 		Collection<SimpleGrantedAuthority> auths = new ArrayList<>();
 
-		if (!body.isEmpty()) {
+        assert body != null;
+        if (!body.isEmpty()) {
 			JSONArray data = body.getJSONArray("roles");
 			for (int i = 0; i < data.length(); i++) {
 				JSONObject rec = data.getJSONObject(i);

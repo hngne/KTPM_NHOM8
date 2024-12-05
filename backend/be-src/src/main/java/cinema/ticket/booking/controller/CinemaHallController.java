@@ -35,10 +35,10 @@ import cinema.ticket.booking.response.SeatsResponse;
 @Tag(name = "3. Cinema Hall Endpoint")
 public class CinemaHallController {
 
-	@Autowired
+
 	private CinemaHallService hallSER;
 
-	@Autowired
+
 	private CinemaSeatService hallSeatSER;
 
 	@GetMapping("/{hall_id}")
